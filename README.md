@@ -3,6 +3,10 @@
 An ExpressionEngine plugin to provide a few more options for getting URL segment data beyond the standard segment variables.
 
 
+## Installation
+Copy the "paths" folder to ```/system/expressionengine/third_party/```
+
+
 ## Usage
 
 ```{exp:paths:full_path}```
