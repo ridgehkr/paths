@@ -1,11 +1,9 @@
-Paths
-=====
+# Paths
 
-An ExpressionEngine plugin to provide a few more options for getting URL segment data
+An ExpressionEngine plugin to provide a few more options for getting URL segment data beyond the standard segment variables.
 
-The Paths plugin allows you to output information about the ExpressionEngine URL path beyond the standard segment variables.
 
-**Usage**
+## Usage
 
 ```{exp:paths:full_path}```
 Outputs all URL segments in order from first to last. For example, being called from http://example.com/path/to/my-page would result in /path/to/my-page
