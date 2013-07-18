@@ -11,9 +11,12 @@ Outputs all URL segments in order from first to last. For example, being called 
 ```{exp:paths:total_segments}```
 Outputs the total number of segments in the URL. For example, if called from /path/to/my-page, it would output 3.
 
+
+You can also loop through each segment by using the ```segments``` tag pair:
+
 ```
 {exp:paths:segments}
   {segment}
 {/exp:paths:segments}
 ```
-Loops through the all segments and outputs them in order from first to last. Note that the "backspace" and "limit" parameters are available by default.
+This outputs all segments in order from first to last. Note that the "backspace" parameter is available by default.
