@@ -37,7 +37,9 @@ class Paths {
 
 	public function total_segments() {
 
-		return count($this->segment_array);
+		$segment_count = count($this->segment_array);
+
+		return $segment_count;
 
 	}
 
