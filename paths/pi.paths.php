@@ -12,7 +12,7 @@
 
 $plugin_info = array(
 	'pi_name' => 'Paths',
-	'pi_version' => '1.0',
+	'pi_version' => '1.1',
 	'pi_author' => 'Caleb Pierce',
 	'pi_author_url' => 'http://calebpierce.com/',
 	'pi_description'=> 'A utility for gathering ExpressionEngine path information',
@@ -37,9 +37,7 @@ class Paths {
 
 	public function total_segments() {
 
-		$segment_count = count($this->segment_array);
-
-		return $segment_count;
+		return count($this->segment_array);
 
 	}
 
@@ -49,6 +47,11 @@ class Paths {
 
 		foreach ( $this->segment_array as $segment )
 			$output_array[] = array('segment' => $segment);
+
+		$reverse = ee()->TMPL->fetch_param('reverse');
+
+		if ( $reverse == "yes" )
+			$output_array = array_reverse($output_array);
 
 		$output = ee()->TMPL->parse_variables(ee()->TMPL->tagdata, $output_array);
 
@@ -70,10 +73,10 @@ Outputs all URL segments in order from first to last. For example, being called 
 {exp:paths:total_segments}
 Outputs the total number of segments in the URL. For example, if called from /path/to/my-page, it would output 3.
 
-{exp:paths:segments}
+{exp:paths:segments reverse="yes"}
 	{segment}
 {/exp:paths:segments}
-Loops through the all segments and outputs them in order from first to last. Note that the "backspace" and "limit" parameters are available by default.
+Loops through the all segments and outputs them in order from first to last. Note that the "backspace" parameter is available by default. Use the "reverse" parameter set to "yes" to optionally reverse the order of the segments
 
 	<?php
         $buffer = ob_get_contents();
