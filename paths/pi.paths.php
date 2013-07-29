@@ -12,7 +12,7 @@
 
 $plugin_info = array(
 	'pi_name' => 'Paths',
-	'pi_version' => '1.0',
+	'pi_version' => '1.1',
 	'pi_author' => 'Caleb Pierce',
 	'pi_author_url' => 'http://calebpierce.com/',
 	'pi_description'=> 'A utility for gathering ExpressionEngine path information',
@@ -61,20 +61,21 @@ class Paths {
 	 **/
 	public function segments() {
 
-		$output_array = array();
+		$output_array = array(); // the array to print to the template
+		$reverse = ee()->TMPL->fetch_param('reverse'); // set to "yes" if the segment array should be reversed (i.e. bottom to top)
 
+		// put the array into EE's variable pair format
 		foreach ( $this->segment_array as $segment )
 			$output_array[] = array('segment' => $segment);
 
-		$reverse = ee()->TMPL->fetch_param('reverse');
-
+		// reverse the array if desired
 		if ( strtolower($reverse) == "yes" )
 			$output_array = array_reverse($output_array);
 
+		// prep output for the template
 		$output = ee()->TMPL->parse_variables(ee()->TMPL->tagdata, $output_array);
 
 		return $output;
-
 	}
 
 
@@ -85,11 +86,10 @@ class Paths {
 	 **/
 	public function ancestor_segment() {
 
-		$steps = ee()->TMPL->fetch_param('steps_up');
+		$steps = ee()->TMPL->fetch_param('steps_up'); // the tag argument for steps up the URI segments
 		$segment = $this->_ancestor_segment($steps);
 
 		return $segment;
-
 	}
 
 
@@ -101,11 +101,10 @@ class Paths {
 	 **/
 	public function path_until() {
 
-		$segment = ee()->TMPL->fetch_param('segment');
+		$segment = ee()->TMPL->fetch_param('segment'); // the tag argument for the segment desired
 		$path = $this->_path_until($segment);
 
 		return $path;
-
 	}
 
 
@@ -116,7 +115,7 @@ class Paths {
 	 **/
 	public function path_until_ancestor() {
 
-		$steps = ee()->TMPL->fetch_param('steps_up');
+		$steps = ee()->TMPL->fetch_param('steps_up'); // the tag argument for steps up the URI segments
 
 		$segment = $this->_ancestor_segment($steps);
 		$path = $this->_path_until($segment, true);
@@ -159,7 +158,6 @@ class Paths {
 		}
 
 		return $path;
-
 	}
 
 
@@ -175,15 +173,14 @@ class Paths {
 		$segment = '';
 		$steps = intval($steps_up);
 
+		// determine the array index of the desired number of steps up
 		$ancestor_index = count($this->segment_array) - ($steps + 1);
 
 		// get the uri segment if it exists as selected
-		if ( array_key_exists($ancestor_index, $this->segment_array) ) {
+		if ( array_key_exists($ancestor_index, $this->segment_array) )
 			$segment = $this->segment_array[$ancestor_index];
-		}
 
 		return $segment;
-
 	}
 
 
@@ -207,7 +204,7 @@ Outputs all URL segments in order from first to last. For example, being called 
 Outputs the total number of segments in the URL. For example, if called from /path/to/my-page, it would output 3.
 
 {exp:paths:segments reverse="yes"}
-	{segment}
+{segment}
 {/exp:paths:segments}
 Loops through the all segments and outputs them in order from first to last. Note that the "backspace" parameter is available by default. Use the "reverse" parameter set to "yes" to optionally reverse the order of the segments
 
