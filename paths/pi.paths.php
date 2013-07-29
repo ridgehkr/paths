@@ -214,6 +214,9 @@ Loops through the all segments and outputs them in order from first to last. Not
 {exp:paths:path_until_ancestor steps_up="1"}
 Starting from the root segment, outputs the URI path until the desired segment is reached. Use the "steps_up" parameter to specify how many levels up to stop at.
 
+{exp:paths:path_until segment="my-segment"}
+Starting from the root segment, outputs the path until the specified segment is reached.
+
 {exp:paths:ancestor_segment steps_up="1"}
 Retrieves the URI segment that is the desired number of levels up in the path. Use the "steps_up" parameter to specify how many levels above the current segment the desired segment is.
 
